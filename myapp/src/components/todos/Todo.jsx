@@ -1,10 +1,16 @@
 import React, {Component} from 'react'
-
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 class TodoApp extends Component {
   render() {
     return (
-      <div>
-        <LoginComponent />
+      <div className="todoApp">
+        <Router>
+          <>
+            <Route path="/" exact component={LoginComponent} />
+            <Route path="/login" exact component={LoginComponent} />
+            <Route path="/welcome" component={Welcome} />
+          </>
+        </Router>
       </div>
     )
   }
@@ -52,6 +58,14 @@ class LoginComponent extends Component {
       {
         [event.target.name] : event.target.value
       }
+    )
+  }
+}
+
+class Welcome extends Component {
+  render() {
+    return (
+      <div>Welcome</div>
     )
   }
 }
