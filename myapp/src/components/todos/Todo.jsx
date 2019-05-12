@@ -32,6 +32,7 @@ class LoginComponent extends Component {
     return (
       <div>
         {this.state.validLogin && <div>Valid login</div>}
+        {!this.state.validLogin && <div>Invalid login</div>}
         Username: <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
         Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
       <button onClick={this.isLoggedIn}>
@@ -43,8 +44,7 @@ class LoginComponent extends Component {
 
   isLoggedIn() {
     if (this.state.username === "zhongtao" && this.state.password === "yztyztyzt") {
-      this.setState({validLogin : true})
-      // console.log("Valid user")
+      this.props.history.push("/welcome")
     } else {
       console.log("Invalid user")
       this.setState({validLogin : false})
