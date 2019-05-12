@@ -1,14 +1,17 @@
 import React, {Component} from 'react'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 class TodoApp extends Component {
   render() {
     return (
       <div className="todoApp">
         <Router>
           <>
-            <Route path="/" exact component={LoginComponent} />
-            <Route path="/login" exact component={LoginComponent} />
-            <Route path="/welcome" component={Welcome} />
+            <Switch>
+              <Route path="/" exact component={LoginComponent} />
+              <Route path="/login" exact component={LoginComponent} />
+              <Route path="/welcome/:providedUserName" component={Welcome} />
+              <Route component={ErrorMessage} />
+            </Switch>
           </>
         </Router>
       </div>
@@ -20,8 +23,8 @@ class LoginComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      username : "zhongtao",
-      password : "yztyztyzt",
+      username : "Zhongtao",
+      password : "yzt",
       validLogin : false
     }
     this.handleChange = this.handleChange.bind(this)
@@ -43,8 +46,8 @@ class LoginComponent extends Component {
   }
 
   isLoggedIn() {
-    if (this.state.username === "zhongtao" && this.state.password === "yztyztyzt") {
-      this.props.history.push("/welcome")
+    if (this.state.username === "Zhongtao" && this.state.password === "yzt") {
+      this.props.history.push(`/welcome/${this.state.username}`)
     } else {
       console.log("Invalid user")
       this.setState({validLogin : false})
@@ -65,9 +68,12 @@ class LoginComponent extends Component {
 class Welcome extends Component {
   render() {
     return (
-      <div>Welcome</div>
+      <div>Welcome {this.props.match.params.providedUserName}</div>
     )
   }
 }
 
+function ErrorMessage() {
+  return <div>An Error Occurred: Invalid path</div>
+}
 export default TodoApp
