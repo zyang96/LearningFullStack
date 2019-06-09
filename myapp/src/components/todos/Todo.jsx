@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 import Todos from './Todos.jsx'
-import AuthenticationService from '../AuthenticationService.js'
 import AuthenticatedRoute from '../AuthenticatedRoute.jsx'
 import HeaderComponent from '../HeaderComponent.jsx'
 import FooterComponent from '../FooterComponent.jsx'
